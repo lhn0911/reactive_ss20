@@ -21,27 +21,23 @@ export default function CloudinaryUploaderScreen() {
     isPlaying: false,
   });
 
-  // Chọn ảnh hoặc video từ thư viện
   const pickMediaFromLibrary = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images", "livePhotos", "videos"],
-      allowsEditing: true, // Cho phép chỉnh sửa ảnh
+      allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
 
     if (!result.canceled) {
-      // Lấy ra uri của file
       setPickerMediaUri(result.assets[0].uri);
-
-      // Lấy ra loại file (image Or video)
       setMediaType(result?.assets[0]?.type);
     }
   };
 
   // Chọn ảnh từ camera
   const pickMediaFromCamera = async () => {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync(); // Xin quyền truy cập vào camera
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
 
     if (status !== ImagePicker.PermissionStatus.GRANTED) {
       Alert.alert(
@@ -58,10 +54,7 @@ export default function CloudinaryUploaderScreen() {
     });
 
     if (!result.canceled) {
-      // Lấy ra uri của file
       setPickerMediaUri(result.assets[0].uri);
-
-      // Lấy ra loại file (image Or video)
       setMediaType(result?.assets[0]?.type);
     }
   };
